@@ -8,12 +8,12 @@ CREATE TABLE [dbo].[Offers] (
 	[StayDurationNights]	  INT			  NOT NULL,
 	[PersonCombination]		  VARCHAR(4)	  NOT NULL,
 	[Service_Code]			  VARCHAR(30)	  NOT NULL,
-	[Price]					  DECIMAL (4, 2)  NOT NULL,
-	[PricePerAdult]			  DECIMAL (4, 2)  NOT NULL,
-	[PricePerChild]			  DECIMAL (4, 2)  NOT NULL,
-	[StrikePrice]			  DECIMAL (4, 2)  NOT NULL,
-	[StrikePricePerAdult]	  DECIMAL (4, 2)  NOT NULL,
-	[StrikePricePerChild]	  DECIMAL (4, 2)  NOT NULL,
+	[Price]					  FLOAT			  NOT NULL,
+	[PricePerAdult]			  INT			  NOT NULL,
+	[PricePerChild]			  FLOAT			  NOT NULL,
+	[StrikePrice]			  FLOAT			  NOT NULL,
+	[StrikePricePerAdult]	  INT			  NOT NULL,
+	[StrikePricePerChild]	  FLOAT			  NOT NULL,
 	[ShowStrikePrice]		  INT			  NOT NULL,
 	[LastUpdated]             DATETIME		  NOT NULL
     CONSTRAINT [Ix_Offers_ID] PRIMARY KEY CLUSTERED ([ID] ASC)

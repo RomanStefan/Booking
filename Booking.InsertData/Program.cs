@@ -1,9 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.IO;
+using Dapper;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Booking.InsertData.Models;
 
 namespace Booking.InsertData
 {
@@ -16,8 +20,9 @@ namespace Booking.InsertData
 
             foreach (string service in annexSerices)
             {
-                float price = 0;
-                float strikePrice = 0;
+                int basePrice = 0;
+                int baseStrikePrice = 0;
+             
                 for(int day = 1; day <= 21; day++) //1 to 21 days period
                 {
                     DateTime checkInDate = DateTime.Now.AddDays(365 + day - 1);
@@ -26,24 +31,43 @@ namespace Booking.InsertData
                     {
                         if (day == 1 && adult == 1)
                         {
-                            price = random.Next(50, 100);
-                            strikePrice = random.Next(50, (int)price);
+                            basePrice = random.Next(50, 100);
+                            baseStrikePrice = random.Next(50, (int)basePrice);
                         }
 
                         for (int children = 0; children <= 6; children++)
                         {
+                            
+                            float price = 0;
+                            float strikePrice = 0;
+
                             string combination = $"{adult}A{children}C";
-                            price = day * (adult * price + children * price * 0.5f);
+                            price = day * (adult * basePrice + children * basePrice * 0.5f);
 
                             bool showStrikePrice = Convert.ToBoolean(random.Next(2));
                             if(showStrikePrice == true)
                             {
-                                strikePrice = day * (adult * strikePrice + children * strikePrice * 0.5f);
+                                strikePrice = day * (adult * baseStrikePrice + children * baseStrikePrice * 0.5f);
                             }
                             else
                             {
                                 strikePrice = 0;
                             }
+
+                            var offer = new Offer();
+                            offer.CheckInDate = checkInDate;
+                            offer.StayDurationNights = day;
+                            offer.PersonCombination = combination;
+                            offer.Service_Code = service;
+                            offer.Price = price;
+                            offer.PricePerAdult = basePrice;
+                            offer.PricePerChild = children == 0 ? 0 : basePrice * 0.5f;
+                            offer.StrikePrice = strikePrice;
+                            offer.StrikePricePerAdult = strikePrice == 0 ? 0 : baseStrikePrice;
+                            offer.StrikePricePerChild = strikePrice == 0 ? 0 : baseStrikePrice * 0.5f;
+                            offer.ShowStrikePrice = showStrikePrice;
+
+                            RunStoredProcedure("SP_Offers_Save", offer);
                         }
                     }
                 }
@@ -64,6 +88,15 @@ namespace Booking.InsertData
             }
 
             return annexServices;
+        }
+
+        public static void RunStoredProcedure(string procedureName, object parameters = null)
+        {
+            string connectionString = "data source=localhost;initial catalog=Trupanion;Integrated Security=True;MultipleActiveResultSets=True";
+            using (var connection = new SqlConnection(connectionString))
+            {
+                connection.Query(procedureName, parameters, commandType: CommandType.StoredProcedure);
+            }
         }
     }
 }
