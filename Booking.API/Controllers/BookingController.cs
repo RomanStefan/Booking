@@ -5,12 +5,19 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Booking.Core.Interfaces;
 using Booking.Core.Models;
 
 namespace Booking.API.Controllers
 {
     public class BookingController : ApiController
     {
+        private readonly IBookingService bookingService;
+
+        BookingController(IBookingService bookingService)
+        {
+            this.bookingService = bookingService;
+        }
 
         [HttpGet]
         public IHttpActionResult SearchAvailability(RequestObject requestObject)
@@ -22,10 +29,11 @@ namespace Booking.API.Controllers
 
             if (!UserIsValid(requestObject.Credentials))
             {
-                throw new HttpResponseException(CreateUnauthorizedResponse())
+                throw new HttpResponseException(CreateUnauthorizedResponse());
             };
 
-            List<Offer> offers = new List<Offer>();
+            List<Offer> offers = bookingService.SearchAvailability(requestObject.DateForm, requestObject.Duration, requestObject.NumberOfAdults, requestObject.NumberOfChildrens);
+            
             return Content(HttpStatusCode.Created, offers);
         }
 
