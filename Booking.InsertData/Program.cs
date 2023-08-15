@@ -7,7 +7,7 @@ using Dapper;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Booking.InsertData.Models;
+using Booking.Core.Models;
 
 namespace Booking.InsertData
 {

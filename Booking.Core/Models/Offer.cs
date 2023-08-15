@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Booking.InsertData.Models
+namespace Booking.Core.Models
 {
     public class Offer
     {

@@ -4,36 +4,24 @@ using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Web.Http;
+using Booking.Core.Models;
 
 namespace Booking.API.Controllers
 {
     public class BookingController : ApiController
     {
-        // GET: api/Booking
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
 
-        // GET: api/Booking/5
-        public string Get(int id)
+        [HttpGet]
+        public IHttpActionResult SearchAvailability(RequestObject requestObject)
         {
-            return "value";
-        }
+            #region Guard Clauses
+            if (requestObject == null)
+                return BadRequest("The content of the request cannot be null");
+            #endregion
 
-        // POST: api/Booking
-        public void Post([FromBody]string value)
-        {
-        }
 
-        // PUT: api/Booking/5
-        public void Put(int id, [FromBody]string value)
-        {
-        }
-
-        // DELETE: api/Booking/5
-        public void Delete(int id)
-        {
+            List<Offer> offers = new List<Offer>();
+            return Content(HttpStatusCode.Created, offers);
         }
     }
 }
