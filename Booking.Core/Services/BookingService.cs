@@ -13,7 +13,7 @@ namespace Booking.Core.Services
     {
         private readonly IBookingRepository bookingRepository;
 
-        BookingService(IBookingRepository bookingRepository)
+        public BookingService(IBookingRepository bookingRepository)
         {
             this.bookingRepository = bookingRepository;
         }

@@ -14,7 +14,7 @@ namespace Booking.API.Controllers
     {
         private readonly IBookingService bookingService;
 
-        BookingController(IBookingService bookingService)
+        public BookingController(IBookingService bookingService)
         {
             this.bookingService = bookingService;
         }
