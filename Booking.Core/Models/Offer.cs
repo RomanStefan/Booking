@@ -11,7 +11,7 @@ namespace Booking.Core.Models
         public DateTime CheckInDate { get; set; }
   	    public int StayDurationNights { get; set; }
   	    public string PersonCombination { get; set; }
-  	    public string Service_Code { get; set; }
+  	    public string ServiceCode { get; set; }
         public float Price { get; set; }
         public int PricePerAdult { get; set; }
         public float PricePerChild { get; set; }

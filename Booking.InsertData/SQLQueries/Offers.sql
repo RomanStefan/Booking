@@ -4,7 +4,7 @@ GO
 
 CREATE TABLE [dbo].[Offers] (
 	[ID]					  INT IDENTITY(1,1) NOT NULL,
-    [CheckInDate]             DATETIME		  NOT NULL,
+    [CheckInDate]             DATE				NOT NULL,
 	[StayDurationNights]	  INT			  NOT NULL,
 	[PersonCombination]		  VARCHAR(4)	  NOT NULL,
 	[Service_Code]			  VARCHAR(30)	  NOT NULL,
@@ -15,7 +15,7 @@ CREATE TABLE [dbo].[Offers] (
 	[StrikePricePerAdult]	  INT			  NOT NULL,
 	[StrikePricePerChild]	  FLOAT			  NOT NULL,
 	[ShowStrikePrice]		  INT			  NOT NULL,
-	[LastUpdated]             DATETIME		  NOT NULL
+	[LastUpdated]             DATE		  NOT NULL
     CONSTRAINT [Ix_Offers_ID] PRIMARY KEY CLUSTERED ([ID] ASC)
 ); 
 

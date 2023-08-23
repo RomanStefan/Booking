@@ -57,6 +57,7 @@
     <Content Include="AnnexServices.txt" />
     <Content Include="SQLQueries\Offers.sql" />
     <Content Include="SQLQueries\SP_Offers_Save.sql" />
+    <Content Include="SQLQueries\SP_Offers_SearchAvailability.sql" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Booking.Core\Booking.Core.csproj">

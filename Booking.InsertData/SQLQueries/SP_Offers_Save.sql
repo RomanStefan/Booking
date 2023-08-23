@@ -17,7 +17,7 @@ CREATE PROCEDURE [dbo].[SP_Offers_Save]
 	@CheckInDate              DATETIME,
 	@StayDurationNights		  INT,
 	@PersonCombination		  VARCHAR(4),
-	@Service_Code			  VARCHAR(30),
+	@ServiceCode			  VARCHAR(30),
 	@Price					  FLOAT,
 	@PricePerAdult			  INT,
 	@PricePerChild			  FLOAT,
@@ -31,6 +31,6 @@ BEGIN
 	(CheckInDate, StayDurationNights, PersonCombination, Service_Code, Price, PricePerAdult, PricePerChild, StrikePrice,
 		StrikePricePerAdult, StrikePricePerChild, ShowStrikePrice, LastUpdated)
 	VALUES
-	(@CheckInDate, @StayDurationNights, @PersonCombination, @Service_Code, @Price,@PricePerAdult,@PricePerChild,@StrikePrice,
+	(@CheckInDate, @StayDurationNights, @PersonCombination, @ServiceCode, @Price,@PricePerAdult,@PricePerChild,@StrikePrice,
 		@StrikePricePerAdult, @StrikePricePerChild, @ShowStrikePrice, GETDATE())
 END;

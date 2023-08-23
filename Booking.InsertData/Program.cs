@@ -58,7 +58,7 @@ namespace Booking.InsertData
                             offer.CheckInDate = checkInDate;
                             offer.StayDurationNights = day;
                             offer.PersonCombination = combination;
-                            offer.Service_Code = service;
+                            offer.ServiceCode = service;
                             offer.Price = price;
                             offer.PricePerAdult = basePrice;
                             offer.PricePerChild = children == 0 ? 0 : basePrice * 0.5f;
